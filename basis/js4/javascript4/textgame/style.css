@@ -1,0 +1,24 @@
+#buttons{
+    position: absolute;
+    margin-top: 50px;
+}
+
+#status{
+    background-color: black;
+    width: 800px;
+    padding: 10px;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+main{
+    position: absolute;
+    margin-top: 100px;
+    max-height: 300px;
+    width: 800px;
+    background-color: grey;
+    padding: 10px;
+    color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
