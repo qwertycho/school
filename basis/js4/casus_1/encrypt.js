@@ -1,4 +1,4 @@
-document.getElementById("inputVeld").addEventListener("keypress", werk)
+document.getElementById("inputVeld").addEventListener("keyup", werk)
 document.getElementById("versleutel").addEventListener("click", selector);
 document.getElementById("decrypt").addEventListener("click", selector);
 document.getElementById("leeg").addEventListener("click", leeg);
@@ -8,7 +8,6 @@ const inPutVeld = document.getElementById("inputVeld");
 const encrButton = document.getElementById("versleutel");
 const decrButton = document.getElementById("decrypt");
 let encrypt = true
-
 
 // Dit is wel een bruh moment
 const letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -27,26 +26,28 @@ function selector(event) {
   }
 }
 
-function werk(event) {
-  if (encrypt) {
-    // input lezen en naar lowercase maken
-    let input = event.key.toLowerCase();
-    console.log(input);
-    //   door iedere char lopen in het inputveld
-    let index = letters.indexOf(input);
-    // checkt of de letter buiten de array valt
-    if (letters.indexOf(input) != -1) {
-      // Als de letter z is (25) word het terug gebracht naar letters[0]
-      if (letters.indexOf(input) < 25) {
-        outPutVeld.value += letters[index + 1];
-      } else {
-        outPutVeld.value += letters[0];
+function werk() {
+  try{
+    let input = inPutVeld.value.toLowerCase()
+    outPutVeld.value = ""
+    for(let i = 0; i < input.length; i++){
+      if (encrypt) {
+        let index = letters.indexOf(input[i]);
+        if (letters.indexOf(input[i]) != -1) {
+          if (letters.indexOf(input) < 25) {
+            outPutVeld.value += letters[index + 1];
+          } else {
+            outPutVeld.value += letters[0];
+          }
+        } else {
+          outPutVeld.value += input[i];
+        }
       }
-      //   Dit is voor tekens die niet in letters[] voorkomen
-    } else {
-      outPutVeld.value += input;
-    }
-  }
+    } 
+  
+} catch(err){
+  window.alert(err)
+}
 }
 
 function decrypt() {
@@ -56,7 +57,7 @@ function decrypt() {
     // input lezen en naar lowercase maken
     let input = document.getElementById("inputVeld").value.toLowerCase();
     //   door iedere char lopen in het inputveld
-    for (let i = 0; i < input.length; i++) {
+    for(let i = 0; i < input.length; i++){
       let inputChar = input[i];
       let index = letters.indexOf(inputChar);
       if (letters.indexOf(inputChar) != -1) {
